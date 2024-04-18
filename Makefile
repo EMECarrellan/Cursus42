@@ -1,6 +1,5 @@
 NAME = libft.a
-SOURCES = \
-	ft_strlcat.c
+SOURCES = ft_strlcat.c ft_strlen.c
 CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)

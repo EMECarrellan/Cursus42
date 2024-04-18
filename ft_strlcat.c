@@ -32,11 +32,9 @@ size_t  ft_strlcat(char *dest, const char *src, size_t size)
 
 		i = ft_strlen(src);
 		j = 0;
-		if (ft_strlen(dest) <= size)
-		{
-			return (ft_strlen(src) + size);
-		}
-		while (src[j] && (ft_strlen(dest)) < size)
+		if (ft_strlen(dest) >= size)
+			return (i + size);
+		while (src[j] && i + j < size - 1)
 		{
 			dest[i + j] = src[j];
 			j++;
@@ -44,12 +42,13 @@ size_t  ft_strlcat(char *dest, const char *src, size_t size)
 		dest[i + j] = '\0';
 		return (ft_strlen(dest) + ft_strlen(src));
 }
-
+/*
 #include <stdio.h>
 int main (void)
 {
 	char *dest = "hola";
 	char *src = "mundo";
-	printf("%ld\n", ft_strlcat(dest, src, 5));
+	printf("%ld\n", ft_strlcat(dest, src, 0));
 	return (0);
 }
+*/
