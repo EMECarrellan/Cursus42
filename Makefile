@@ -10,6 +10,10 @@ SRC = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_bzero.c ft_isascii.c \
 
 OBJ = $(SRC:.c=.o) $@
 
+BONUSSRC = ft_lstnew_bonus.c
+
+BONUSOBJ = $(BONUSSRC:.c=.o) $@
+
 NAME = libft.a
 CFLAGS = -Wall -Wextra -Werror
 
@@ -17,6 +21,11 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	ar rcs $@ $(OBJ)
+
+bonus: $(NAME)
+
+$(NAME): $(BONUSOBJ)
+	ar rcs $@ $(BONUSOBJ)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
