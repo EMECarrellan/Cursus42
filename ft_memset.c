@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emontes- <emontes-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/15 11:49:31 by emontes-          #+#    #+#             */
-/*   Updated: 2024/05/08 12:42:03 by emontes-         ###   ########.fr       */
+/*   Created: 2024/04/10 11:12:59 by emontes-          #+#    #+#             */
+/*   Updated: 2024/05/08 12:42:58 by emontes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *dest, const char *src, size_t size)
+void	*ft_memset(void *b, int c, size_t len)
 {
 	size_t	i;
-	size_t	j;
 
-	i = ft_strlen(dest);
-	j = 0;
-	if (ft_strlen(dest) >= size)
-		return (ft_strlen(src) + size);
-	while (src[j] && i + j < size - 1)
+	i = 0;
+	while (i < len)
 	{
-		dest[i + j] = src[j];
-		j++;
+		((unsigned char *)b)[i] = (unsigned char)c;
+		i++;
 	}
-	dest[i + j] = '\0';
-	return (i + ft_strlen(src));
+	return (b);
 }

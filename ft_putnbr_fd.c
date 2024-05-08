@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emontes- <emontes-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/15 11:49:31 by emontes-          #+#    #+#             */
-/*   Updated: 2024/05/08 12:42:03 by emontes-         ###   ########.fr       */
+/*   Created: 2024/05/07 14:55:29 by emontes-          #+#    #+#             */
+/*   Updated: 2024/05/08 12:42:47 by emontes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *dest, const char *src, size_t size)
+void	ft_putnbr_fd(int n, int fd)
 {
-	size_t	i;
-	size_t	j;
-
-	i = ft_strlen(dest);
-	j = 0;
-	if (ft_strlen(dest) >= size)
-		return (ft_strlen(src) + size);
-	while (src[j] && i + j < size - 1)
+	if (n == -2147483648)
 	{
-		dest[i + j] = src[j];
-		j++;
+		ft_putchar_fd('-', fd);
+		ft_putchar_fd('2', fd);
+		ft_putnbr_fd(147483648, fd);
 	}
-	dest[i + j] = '\0';
-	return (i + ft_strlen(src));
+	else if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		n *= -1;
+		ft_putnbr_fd(n, fd);
+	}
+	else if (n > 9)
+	{
+		ft_putnbr_fd(n / 10, fd);
+		ft_putnbr_fd(n % 10, fd);
+	}
+	else
+		ft_putchar_fd(n += '0', fd);
 }

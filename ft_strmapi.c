@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emontes- <emontes-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/15 11:49:31 by emontes-          #+#    #+#             */
-/*   Updated: 2024/05/08 12:42:03 by emontes-         ###   ########.fr       */
+/*   Created: 2024/05/03 11:37:52 by emontes-          #+#    #+#             */
+/*   Updated: 2024/05/08 12:41:38 by emontes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *dest, const char *src, size_t size)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	size_t	i;
-	size_t	j;
+	int		i;
+	char	*str;
 
-	i = ft_strlen(dest);
-	j = 0;
-	if (ft_strlen(dest) >= size)
-		return (ft_strlen(src) + size);
-	while (src[j] && i + j < size - 1)
+	i = ft_strlen(s);
+	str = malloc (i * sizeof(char) + 1);
+	if (!str)
+		return (NULL);
+	str[i] = '\0';
+	while (i != 0)
 	{
-		dest[i + j] = src[j];
-		j++;
+		i--;
+		str[i] = f(i, s[i]);
 	}
-	dest[i + j] = '\0';
-	return (i + ft_strlen(src));
+	return (str);
 }

@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emontes- <emontes-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/15 11:49:31 by emontes-          #+#    #+#             */
-/*   Updated: 2024/05/08 12:42:03 by emontes-         ###   ########.fr       */
+/*   Created: 2024/04/19 11:20:48 by emontes-          #+#    #+#             */
+/*   Updated: 2024/05/08 12:24:08 by emontes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *dest, const char *src, size_t size)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	size_t	i;
-	size_t	j;
+	unsigned char	*str1;
+	unsigned char	*str2;
 
-	i = ft_strlen(dest);
-	j = 0;
-	if (ft_strlen(dest) >= size)
-		return (ft_strlen(src) + size);
-	while (src[j] && i + j < size - 1)
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *)s2;
+	while (n > 0)
 	{
-		dest[i + j] = src[j];
-		j++;
+		n--;
+		while (*str1 == *str2 && n > 0)
+		{
+			str1++;
+			str2++;
+			n--;
+		}
+		if ((*str1 < *str2))
+			return (*str1 - *str2);
+		else if ((*str1 > *str2))
+			return (*str1 - *str2);
 	}
-	dest[i + j] = '\0';
-	return (i + ft_strlen(src));
+	return (0);
 }

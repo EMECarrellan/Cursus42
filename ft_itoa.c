@@ -1,28 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emontes- <emontes-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/10 14:08:44 by emontes-          #+#    #+#             */
-/*   Updated: 2024/05/08 12:43:05 by emontes-         ###   ########.fr       */
+/*   Created: 2024/05/02 14:12:34 by emontes-          #+#    #+#             */
+/*   Updated: 2024/05/08 12:43:13 by emontes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+static int	count_n(int n)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	if (!dest && !src)
-		return (dest);
-	while (i < n)
+	while (n != 0)
 	{
-		((char *)dest)[i] = ((char *)src)[i];
+		n /= 10;
 		i++;
 	}
-	return (dest);
+	return (i);
+}
+
+char	*ft_itoa(int n)
+{
+	char	*str;
+	int		i;
+	int		res;
+
+	i = count_n(n);
+	if (n <= 0)
+		i++;
+	str = malloc ((i + 1) * sizeof(char));
+	if (!str)
+		return (NULL);
+	str[i] = '\0';
+	if (n < 0)
+		str[0] = '-';
+	else if (n == 0)
+		str[0] = '0';
+	while (n != 0)
+	{
+		res = n % 10;
+		if (res < 0)
+			res *= -1;
+		n /= 10;
+		i--;
+		str[i] = res + '0';
+	}
+	return (str);
 }
