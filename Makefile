@@ -32,6 +32,7 @@ $(NAME): $(BONUSOBJ)
 
 clean:
 	rm -f $(OBJ) $@
+	rm -f $(BONUSOBJ) $@
 
 fclean:	clean
 	rm -f $(NAME) $@
