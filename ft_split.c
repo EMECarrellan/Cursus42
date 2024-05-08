@@ -66,7 +66,7 @@ static char	**ft_free(char **s)
 	return (NULL);
 }
 
-char	**ft_aux_split(const char *s, char c)
+static char	**ft_aux_split(const char *s, char c)
 {
 	char		**arr;
 	int			i;
