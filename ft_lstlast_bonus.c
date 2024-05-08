@@ -1,13 +1,13 @@
 #include "libft.h"
 t_list	*ft_lstlast(t_list *lst)
 {
-	int	final;
+	int	curr;
 
-	final = ft_lstsize(lst) - 1;
-	while (lst && final > 0)
+	curr = ft_lstsize(lst) - 1;
+	while (lst && curr > 0)
 	{
 		lst = lst->next;
-		final--;
+		curr--;
 	}
 	return(lst);
 }
