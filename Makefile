@@ -11,7 +11,7 @@ SRC = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_bzero.c ft_isascii.c \
 OBJ = $(SRC:.c=.o) $@
 
 BONUSSRC = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
-			ft_lstlast_bonus.c ft_lstadd_back_bonus.c
+			ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c
 
 BONUSOBJ = $(BONUSSRC:.c=.o) $@
 
