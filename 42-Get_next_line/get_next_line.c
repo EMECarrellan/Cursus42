@@ -6,7 +6,7 @@
 /*   By: emontes- <emontes-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:06:31 by emontes-          #+#    #+#             */
-/*   Updated: 2024/05/17 11:16:50 by emontes-         ###   ########.fr       */
+/*   Updated: 2024/05/17 13:14:49 by emontes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,20 @@ char	*get_next_line(int fd)
 	aux_buf = buf;
 	while (*buf != '\n' && *buf)
 		buf++;
+	*buf = '\0';
 	ft_strlen_get(buf);
+
+	//printf("Número de caracteres del aux_buf: %d\n", ft_strlen_get(aux_buf));
+
 	printf("Número de caracteres del buf: %d\n", ft_strlen_get(buf));
 	printf("Número de caracteres del txt: %zd\n", len);
-	printf("Cadena:\n¯¯¯¯¯¯\n%s\n", buf);
-	close (fd);
-	return (buf);
+
+	// printf("Cadena:\n¯¯¯¯¯¯\n%s\n", buf);
+
+	ft_strlcpy_get(buf, aux_buf, ft_strlen_get(aux_buf) - ft_strlen_get(buf));
+	ft_putstr_get(aux_buf);
+	return (aux_buf);
 }
-
-
 
 int main ()
 {
@@ -45,5 +50,6 @@ int main ()
 	if (fd < 0)
 		return (1);
 	str = get_next_line(fd);
-	printf("------\n%s", str);
+	// printf("------\n%s", str);
+	close (fd);
 }
