@@ -15,16 +15,19 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 30
+#  define BUFFER_SIZE 100
 # endif
 
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
+#include <stdio.h>
 
 char	*get_next_line(int fd);
 int		ft_strlen_get(char *str);
-void	ft_putstr_get(char *str);
-size_t	ft_strlcpy_get(char *dest, char *src, size_t destsize);
+char	*ft_strlcpy_get(char *dest, char *src, size_t destsize);
+char	*ft_strdup_get(char *s1);
+char	*ft_strjoin_get(char *s1, char *s2);
+char	*ft_strchr_get(char *s, int c);
 
 #endif

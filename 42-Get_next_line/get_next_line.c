@@ -1,55 +1,53 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: emontes- <emontes-@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 16:06:31 by emontes-          #+#    #+#             */
-/*   Updated: 2024/05/17 13:14:49 by emontes-         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "get_next_line.h"
-#include <stdio.h>
+
+static char *ft_get_line(char *buf)
+{
+	int		i = 0;
+	char	*line;
+	while (buf[i] && buf[i] != '\n')
+		i++;
+	line = calloc(i + 2, sizeof(char));
+	if (!line)
+		return(0);
+	ft_strlcpy_get(line, buf, i + 2);
+	return (line);
+}
 
 char	*get_next_line(int fd)
 {
-	size_t		len;
-	char		*buf;
-	char		*aux_buf;
+	static char	*buf;
+	char		*aux;
+	char        *line = "";
 
-	buf = (char *)calloc(BUFFER_SIZE, sizeof(char));
+	buf = calloc(BUFFER_SIZE, sizeof(char));
 	if (!buf)
 		return (0);
-	len = read (fd, buf, BUFFER_SIZE);
-	aux_buf = buf;
-	while (*buf != '\n' && *buf)
-		buf++;
-	*buf = '\0';
-	ft_strlen_get(buf);
-
-	//printf("Número de caracteres del aux_buf: %d\n", ft_strlen_get(aux_buf));
-
-	printf("Número de caracteres del buf: %d\n", ft_strlen_get(buf));
-	printf("Número de caracteres del txt: %zd\n", len);
-
-	// printf("Cadena:\n¯¯¯¯¯¯\n%s\n", buf);
-
-	ft_strlcpy_get(buf, aux_buf, ft_strlen_get(aux_buf) - ft_strlen_get(buf));
-	ft_putstr_get(aux_buf);
-	return (aux_buf);
+	while (read (fd, buf, BUFFER_SIZE))
+	{
+		if (fd <= 0)
+		{
+			free (buf);
+			return (0);
+		}
+		if (ft_strchr_get(buf, '\n'))
+		{
+			line = ft_strjoin_get(line, "\n");
+			return (line);
+		}
+		aux = ft_get_line(buf);
+		//printf(" aux = %s", aux);
+		line = ft_strjoin_get(line, aux);
+	}
+	//printf("\naux = %s", aux);
+	//printf("line = %s", line);
+	return (line);
 }
 
-int main ()
-{
-	int		fd;
-	char	*str;
-
-	fd = open ("prueba.txt", O_RDONLY);
-	if (fd < 0)
-		return (1);
-	str = get_next_line(fd);
-	// printf("------\n%s", str);
-	close (fd);
-}
+// int main()
+// {
+// 	int fd = open("prueba.txt", O_RDONLY);
+// 	printf("%s", get_next_line(fd));
+// 	printf("%s", get_next_line(fd));
+// 	close (fd);
+// 	return 0;
+// }
