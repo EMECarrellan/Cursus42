@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emontes- <emontes-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emontes- <emontes-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:05:47 by emontes-          #+#    #+#             */
-/*   Updated: 2024/05/17 12:57:16 by emontes-         ###   ########.fr       */
+/*   Updated: 2024/05/27 11:37:21 by emontes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ char	*ft_strjoin_get(char *s1, char *s2)
 		s2++;
 	}
 	str[i] = '\0';
-    
 	return (str);
 }
 
@@ -105,4 +104,27 @@ char	*ft_strchr_get(char *s, int c)
 	if (s[i] == (char)c)
 		return ((char *)s + i);
 	return (0);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < n)
+	{
+		((char *)s)[i] = 0;
+		i++;
+	}
+}
+
+void	*ft_calloc_get(size_t count, size_t size)
+{
+	void	*i;
+
+	i = malloc(count * size);
+	if (!i)
+		return (0);
+	ft_bzero(i, count * size);
+	return (i);
 }
