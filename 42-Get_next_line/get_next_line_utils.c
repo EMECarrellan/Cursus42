@@ -6,7 +6,7 @@
 /*   By: emontes- <emontes-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:05:47 by emontes-          #+#    #+#             */
-/*   Updated: 2024/05/27 11:37:21 by emontes-         ###   ########.fr       */
+/*   Updated: 2024/06/10 14:13:41 by emontes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_strlen_get(char *str)
 
 char	*ft_strlcpy_get(char *dest, char *src, size_t destsize)
 {
-	size_t		buf;
+	size_t	buf;
 	char	*s;
 
 	buf = 0;
@@ -52,9 +52,7 @@ char	*ft_strdup_get(char *s1)
 		return (0);
 	i = 0;
 	if (s1 == NULL)
-	{
 		return (NULL);
-	}
 	while (*s1)
 	{
 		((char *)str)[i] = *s1;
@@ -71,9 +69,13 @@ char	*ft_strjoin_get(char *s1, char *s2)
 	size_t	i;
 
 	i = 0;
+
+	if (!s1)
+		s1 = ft_strdup_get("");
 	str = malloc ((ft_strlen_get(s1) + ft_strlen_get(s2) + 1) * (sizeof(char)));
-    if (!str)
+	if (!str)
 		return (NULL);
+
 	while (*s1)
 	{
 		str[i] = *s1;
@@ -95,6 +97,8 @@ char	*ft_strchr_get(char *s, int c)
 	int	i;
 
 	i = 0;
+	if (s == NULL)
+		return (NULL);
 	while (s[i])
 	{
 		if (s[i] == (char)c)
@@ -103,28 +107,5 @@ char	*ft_strchr_get(char *s, int c)
 	}
 	if (s[i] == (char)c)
 		return ((char *)s + i);
-	return (0);
-}
-
-void	ft_bzero(void *s, size_t n)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < n)
-	{
-		((char *)s)[i] = 0;
-		i++;
-	}
-}
-
-void	*ft_calloc_get(size_t count, size_t size)
-{
-	void	*i;
-
-	i = malloc(count * size);
-	if (!i)
-		return (0);
-	ft_bzero(i, count * size);
-	return (i);
+	return (NULL);
 }
