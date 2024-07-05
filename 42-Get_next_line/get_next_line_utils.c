@@ -6,7 +6,7 @@
 /*   By: emontes- <emontes-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:05:47 by emontes-          #+#    #+#             */
-/*   Updated: 2024/06/13 19:33:45 by emontes-         ###   ########.fr       */
+/*   Updated: 2024/07/05 13:43:58 by emontes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ char	*ft_strlcpy_get(char *dest, char *src, size_t destsize)
 		s++;
 		buf++;
 	}
-	*dest = '\0';
+	//*dest = '\0';
+	//printf("cpy: %s ", (dest - buf));
 	return (dest - buf);
 }
 
 char	*ft_strdup_get(char *s1)
 {
 	void	*str;
-	char	*aux;
 	size_t	i;
 
 	str = (malloc ((ft_strlen_get(s1) + 1) * sizeof(char)));

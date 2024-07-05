@@ -6,7 +6,7 @@
 /*   By: emontes- <emontes-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 11:20:56 by emontes-          #+#    #+#             */
-/*   Updated: 2024/06/13 19:34:10 by emontes-         ###   ########.fr       */
+/*   Updated: 2024/07/05 14:06:49 by emontes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,23 @@
 char	*get_buffer(int fd, char *buf)
 {
 	char	*aux;
-	char	*aux_buf;
 	int		i;
 
 	i = 1;
 	aux = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!aux)
-	{
-		free (buf);
 		return (0);
-	}
-	while (!ft_strchr_get(aux, '\n') && i > 0)
+	while (!ft_strchr_get(aux, '\n') && i != 0)
 	{
 		i = read(fd, aux, BUFFER_SIZE);
-		aux[BUFFER_SIZE] = '\0';
 		if (i == -1)
-			break ;
-		aux_buf = buf;
-		buf = ft_strjoin_get(aux_buf, aux);
-		free(aux_buf);
+		{
+			free(aux);
+			free(buf);
+			return (NULL);
+		}
+		aux[i] = 0;
+		buf = ft_strjoin_get(buf, aux);
 	}
 	free (aux);
 	return (buf);
@@ -57,12 +55,14 @@ char	*get_line(char *buf)
 	if (buf[i] != '\0')
 		i++;
 	aux = ft_strlcpy_get(aux, buf, i);
+	aux[i] = 0;
 	return (aux);
 }
 
 char	*get_remainder(char *buf)
 {
 	char	*aux;
+	char	*remainder;
 
 	aux = buf;
 	if (!aux)
@@ -71,58 +71,73 @@ char	*get_remainder(char *buf)
 		aux++;
 	if (*aux != '\0')
 		aux++;
-	aux = ft_strdup_get(aux);
+	remainder = ft_strdup_get(aux);
 	free (buf);
-	return (aux);
+	buf = NULL;
+	return (remainder);
 }
 
 char	*get_next_line(int fd)
 {
 	char		*line;
 	char		*aux_line;
-	char		*aux_buf;
 	static char	*buf;
 
 	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (NULL);
 	buf = get_buffer(fd, buf);
-	if (!buf)
-		return (0);
 	line = get_line(buf);
+	if (!buf)
+	{
+		free (line);
+		return (0);
+	}
 	if (line[0] != '\0')
 	{
 		aux_line = line;
-		line = ft_strjoin_get(line, "\n");
+		line = ft_strjoin_get(line, "");
 		free(aux_line);
 	}
 	buf = get_remainder(buf);
-
+	if (!*buf)
+		return (0);
 	return (line);
 }
 
 int main (void)
 {
-	// comprobar por qué funciona mal con números grandes de buffer
 	int fd = open("prueba.txt", O_RDONLY);
 	char *mander = NULL;
 
 	printf("%s", mander = get_next_line(fd));
-	// free (mander);
+	free(mander);
 	printf("%s", mander = get_next_line(fd));
-	// free (mander);
+	free (mander);
 	printf("%s", mander = get_next_line(fd));
-	// free (mander);
+	free (mander);
 	printf("%s", mander = get_next_line(fd));
-	// free (mander);
+	free (mander);
 	printf("%s", mander = get_next_line(fd));
-	// free (mander);
+	free (mander);
 	printf("%s", mander = get_next_line(fd));
-	// free (mander);
+	free (mander);
 	printf("%s", mander = get_next_line(fd));
-	// free (mander);
+	free (mander);
 	printf("%s", mander = get_next_line(fd));
+	free (mander);
+	close(fd);
+
+	// mander = get_next_line(fd);
+	// free(mander);
+	// mander = get_next_line(fd);
 	// free (mander);
-	printf("%s", mander = get_next_line(fd));
+	// mander = get_next_line(fd);
 	// free (mander);
+	// mander = get_next_line(fd);
+	// free (mander);
+	// mander = get_next_line(fd);
+	// free (mander);
+	// mander = get_next_line(fd);
+	// close (fd);
 	return (0);
 }
