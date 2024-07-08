@@ -6,7 +6,7 @@
 /*   By: emontes- <emontes-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 11:20:56 by emontes-          #+#    #+#             */
-/*   Updated: 2024/07/05 14:06:49 by emontes-         ###   ########.fr       */
+/*   Updated: 2024/07/08 11:43:29 by emontes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,14 @@
 char	*get_buffer(int fd, char *buf)
 {
 	char	*aux;
+	// char	*aux_buf;
 	int		i;
 
 	i = 1;
 	aux = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!aux)
 		return (0);
+	aux[0] = 0;
 	while (!ft_strchr_get(aux, '\n') && i != 0)
 	{
 		i = read(fd, aux, BUFFER_SIZE);
@@ -72,8 +74,6 @@ char	*get_remainder(char *buf)
 	if (*aux != '\0')
 		aux++;
 	remainder = ft_strdup_get(aux);
-	free (buf);
-	buf = NULL;
 	return (remainder);
 }
 
@@ -99,45 +99,43 @@ char	*get_next_line(int fd)
 		free(aux_line);
 	}
 	buf = get_remainder(buf);
-	if (!*buf)
-		return (0);
 	return (line);
 }
 
-int main (void)
-{
-	int fd = open("prueba.txt", O_RDONLY);
-	char *mander = NULL;
+// int main (void)
+// {
+// 	int fd = open("prueba.txt", O_RDONLY);
+// 	char *mander = NULL;
 
-	printf("%s", mander = get_next_line(fd));
-	free(mander);
-	printf("%s", mander = get_next_line(fd));
-	free (mander);
-	printf("%s", mander = get_next_line(fd));
-	free (mander);
-	printf("%s", mander = get_next_line(fd));
-	free (mander);
-	printf("%s", mander = get_next_line(fd));
-	free (mander);
-	printf("%s", mander = get_next_line(fd));
-	free (mander);
-	printf("%s", mander = get_next_line(fd));
-	free (mander);
-	printf("%s", mander = get_next_line(fd));
-	free (mander);
-	close(fd);
+// 	printf("%s", mander = get_next_line(fd));
+// 	free(mander);
+// 	printf("%s", mander = get_next_line(fd));
+// 	free (mander);
+// 	printf("%s", mander = get_next_line(fd));
+// 	free (mander);
+// 	printf("%s", mander = get_next_line(fd));
+// 	free (mander);
+// 	printf("%s", mander = get_next_line(fd));
+// 	free (mander);
+// 	printf("%s", mander = get_next_line(fd));
+// 	free (mander);
+// 	printf("%s", mander = get_next_line(fd));
+// 	free (mander);
+// 	printf("%s", mander = get_next_line(fd));
+// 	free (mander);
+// 	close(fd);
 
-	// mander = get_next_line(fd);
-	// free(mander);
-	// mander = get_next_line(fd);
-	// free (mander);
-	// mander = get_next_line(fd);
-	// free (mander);
-	// mander = get_next_line(fd);
-	// free (mander);
-	// mander = get_next_line(fd);
-	// free (mander);
-	// mander = get_next_line(fd);
-	// close (fd);
-	return (0);
-}
+// 	// mander = get_next_line(fd);
+// 	// free(mander);
+// 	// mander = get_next_line(fd);
+// 	// free (mander);
+// 	// mander = get_next_line(fd);
+// 	// free (mander);
+// 	// mander = get_next_line(fd);
+// 	// free (mander);
+// 	// mander = get_next_line(fd);
+// 	// free (mander);
+// 	// mander = get_next_line(fd);
+// 	// close (fd);
+// 	return (0);
+// }
