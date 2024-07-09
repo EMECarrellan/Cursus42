@@ -6,7 +6,7 @@
 /*   By: emontes- <emontes-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 11:20:56 by emontes-          #+#    #+#             */
-/*   Updated: 2024/07/09 13:01:25 by emontes-         ###   ########.fr       */
+/*   Updated: 2024/07/09 15:49:52 by emontes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,3 +97,28 @@ char	*get_next_line(int fd)
 	buf = get_remainder(buf);
 	return (line);
 }
+// #include <stdio.h>
+
+// int main ()
+// {
+// 	int	fd = open("prueba.txt", O_RDONLY);
+// 	char *mander = NULL;
+
+// 	printf("%s", mander = get_next_line(fd));
+// 	free(mander);
+// 	printf("%s", mander = get_next_line(fd));
+// 	free (mander);
+// 	printf("%s", mander = get_next_line(fd));
+// 	free (mander);
+// 	printf("%s", mander = get_next_line(fd));
+// 	free (mander);
+// 	printf("%s", mander = get_next_line(fd));
+// 	free (mander);
+// 	printf("%s", mander = get_next_line(fd));
+// 	free (mander);
+// 	printf("%s", mander = get_next_line(fd));
+// 	free (mander);
+// 	printf("%s", mander = get_next_line(fd));
+// 	free (mander);
+// 	close(fd);
+// }

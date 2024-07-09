@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*    get_next_line_bonus.c                             :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emontes- <emontes-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 11:20:56 by emontes-          #+#    #+#             */
-/*   Updated: 2024/07/09 13:01:14 by emontes-         ###   ########.fr       */
+/*   Updated: 2024/07/09 15:49:44 by emontes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,33 @@ char	*get_remainder(char *buf)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*buf;
+	static char	*buf[__FD_SETSIZE];
 
 	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (0);
-	buf = get_buffer(fd, buf);
-	if (!buf)
+	buf[fd] = get_buffer(fd, buf[fd]);
+	if (!buf[fd])
 		return (0);
-	line = get_line(buf);
-	buf = get_remainder(buf);
+	line = get_line(buf[fd]);
+	buf[fd] = get_remainder(buf[fd]);
 	return (line);
 }
+// #include <stdio.h>
+
+// int main ()
+// {
+// 	int	fd = open("prueba.txt", O_RDONLY);
+// 	int	fd2 = open("prueba_2.txt", O_RDONLY);
+// 	char *mander = NULL;
+// 	char *meleon = NULL;
+
+// 	printf("%s", mander = get_next_line(fd));
+// 	free(mander);
+// 	printf("%s", mander = get_next_line(fd2));
+// 	free (meleon);
+// 	printf("%s", mander = get_next_line(fd2));
+// 	free (meleon);
+// 	printf("%s", mander = get_next_line(fd));
+// 	free (mander);
+// 	close(fd);
+// }

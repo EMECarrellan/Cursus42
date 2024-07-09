@@ -6,7 +6,7 @@
 /*   By: emontes- <emontes-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:06:05 by emontes-          #+#    #+#             */
-/*   Updated: 2024/07/09 13:01:44 by emontes-         ###   ########.fr       */
+/*   Updated: 2024/07/09 15:36:52 by emontes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 # include <fcntl.h>
 # include <stdlib.h>
-# include <stdio.h>
+# include <unistd.h>
 
 char	*get_next_line(int fd);
 int		ft_strlen_get(char *str);
