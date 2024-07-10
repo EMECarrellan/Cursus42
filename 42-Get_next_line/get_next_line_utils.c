@@ -6,7 +6,7 @@
 /*   By: emontes- <emontes-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:05:47 by emontes-          #+#    #+#             */
-/*   Updated: 2024/07/09 12:51:21 by emontes-         ###   ########.fr       */
+/*   Updated: 2024/07/10 10:41:01 by emontes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*ft_strdup_get(char *s1)
 
 	str = (malloc ((ft_strlen_get(s1) + 1) * sizeof(char)));
 	if (!str)
-		return (0);
+		return (NULL);
 	i = 0;
 	if (!s1)
 	{
