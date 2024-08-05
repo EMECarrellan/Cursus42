@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: emontes- <emontes-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/27 11:20:56 by emontes-          #+#    #+#             */
-/*   Updated: 2024/07/10 11:14:01 by emontes-         ###   ########.fr       */
+/*   Created: 2024/05/17 11:05:47 by emontes-          #+#    #+#             */
+/*   Updated: 2024/08/05 13:47:07 by emontes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*get_buffer(int fd, char *buf)
 	aux = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!aux)
 		return (NULL);
-	aux[0] = 0;
+	aux[0] = '\0';
 	while (!ft_strchr_get(aux, '\n') && i != 0)
 	{
 		i = read(fd, aux, BUFFER_SIZE);
@@ -37,7 +37,7 @@ char	*get_buffer(int fd, char *buf)
 		buf = ft_strjoin_get(buf, aux);
 		free(aux_buf);
 	}
-	free (aux);
+	free(aux);
 	return (buf);
 }
 
@@ -46,7 +46,7 @@ char	*get_line(char *buf)
 	char	*aux;
 	int		i;
 
-	if (!buf)
+	if (!buf[0])
 		return (NULL);
 	i = 0;
 	while (buf[i] && buf[i] != '\n')
@@ -66,20 +66,17 @@ char	*get_remainder(char *buf)
 	char	*remainder;
 	int		i;
 
-	if (!buf)
-		return (NULL);
 	i = 0;
 	while (buf[i] && buf[i] != '\n')
 		i++;
-	if (buf[i] == '\n')
-		i++;
-	if (buf[i] == 0)
+	if (buf[i] == '\0')
 	{
-		free (buf);
+		free(buf);
 		return (NULL);
 	}
+	i++;
 	remainder = ft_strdup_get(buf + i);
-	free (buf);
+	free(buf);
 	return (remainder);
 }
 
@@ -94,25 +91,6 @@ char	*get_next_line(int fd)
 	if (!buf)
 		return (NULL);
 	line = get_line(buf);
-	if (!line || line[0] == '\0')
-	{
-		if (line)
-			free(line);
-		return (NULL);
-	}
 	buf = get_remainder(buf);
 	return (line);
-}
-
-#include <stdio.h>
-
-int main() {
-	int fd = open("prueba.txt", O_RDONLY);
-	char *mander = NULL;
-
-	printf("%s", mander = get_next_line(-1));
-	free(mander);
-	printf("%s", mander = get_next_line(fd));
-	free(mander);
-	close(fd);
 }

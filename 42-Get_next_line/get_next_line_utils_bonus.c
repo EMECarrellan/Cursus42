@@ -6,11 +6,11 @@
 /*   By: emontes- <emontes-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:05:47 by emontes-          #+#    #+#             */
-/*   Updated: 2024/07/09 12:59:55 by emontes-         ###   ########.fr       */
+/*   Updated: 2024/08/05 13:46:51 by emontes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	ft_strlen_get(char *str)
 {

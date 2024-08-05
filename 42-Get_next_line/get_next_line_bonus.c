@@ -6,11 +6,11 @@
 /*   By: emontes- <emontes-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 11:20:56 by emontes-          #+#    #+#             */
-/*   Updated: 2024/07/10 11:11:00 by emontes-         ###   ########.fr       */
+/*   Updated: 2024/08/05 13:46:36 by emontes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*get_buffer(int fd, char *buf)
 {
@@ -22,7 +22,7 @@ char	*get_buffer(int fd, char *buf)
 	aux = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!aux)
 		return (NULL);
-	aux[0] = 0;
+	aux[0] = '\0';
 	while (!ft_strchr_get(aux, '\n') && i != 0)
 	{
 		i = read(fd, aux, BUFFER_SIZE);
@@ -37,7 +37,7 @@ char	*get_buffer(int fd, char *buf)
 		buf = ft_strjoin_get(buf, aux);
 		free(aux_buf);
 	}
-	free (aux);
+	free(aux);
 	return (buf);
 }
 
@@ -46,7 +46,7 @@ char	*get_line(char *buf)
 	char	*aux;
 	int		i;
 
-	if (!buf)
+	if (!buf[0])
 		return (NULL);
 	i = 0;
 	while (buf[i] && buf[i] != '\n')
@@ -66,20 +66,17 @@ char	*get_remainder(char *buf)
 	char	*remainder;
 	int		i;
 
-	if (!buf)
-		return (NULL);
 	i = 0;
 	while (buf[i] && buf[i] != '\n')
 		i++;
-	if (buf[i] == '\n')
-		i++;
-	if (buf[i] == 0)
+	if (buf[i] == '\0')
 	{
-		free (buf);
+		free(buf);
 		return (NULL);
 	}
+	i++;
 	remainder = ft_strdup_get(buf + i);
-	free (buf);
+	free(buf);
 	return (remainder);
 }
 
@@ -94,32 +91,6 @@ char	*get_next_line(int fd)
 	if (!buf[fd])
 		return (NULL);
 	line = get_line(buf[fd]);
-	if (!line || line[0] == '\0')
-	{
-		if (line)
-			free(line);
-		return (NULL);
-	}
 	buf[fd] = get_remainder(buf[fd]);
 	return (line);
-}
-#include <stdio.h>
-
-int main ()
-{
-	int	fd = open("prueba.txt", O_RDONLY);
-	int	fd2 = open("prueba_2.txt", O_RDONLY);
-	char *mander = NULL;
-	char *meleon = NULL;
-
-	printf("%s", mander = get_next_line(fd));
-	free(mander);
-	printf("%s", meleon = get_next_line(fd2));
-	free (meleon);
-	printf("%s", mander = get_next_line(fd));
-	free(mander);
-	printf("%s", meleon = get_next_line(fd2));
-	free (meleon);
-	close (fd);
-	close (fd2);
 }
