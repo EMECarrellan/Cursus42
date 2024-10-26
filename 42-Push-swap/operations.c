@@ -55,7 +55,7 @@ void    ft_pa(t_stack **stack_b, t_stack **stack_a, int j)
 {
     t_stack *tmp;
 
-    if(ft_lst_size(*stack_b) <= 1)
+    if(*stack_b == NULL)
         return ;
     tmp = *stack_a;
     *stack_a = *stack_b;
