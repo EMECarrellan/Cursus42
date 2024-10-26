@@ -6,7 +6,7 @@
 /*   By: emontes- <emontes-@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 13:02:46 by emontes-          #+#    #+#             */
-/*   Updated: 2024/09/30 13:04:02 by emontes-         ###   ########.fr       */
+/*   Updated: 2024/10/26 12:23:54 by emontes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void    ft_sort_all(t_stack **stack_a, t_stack **stack_b)
         while (tmp_b)
         {
             cost_a = ft_check_cost(*stack_a, tmp_b->index);
-            if (cost_a < min_cost)
+            if (cost_a <= min_cost)
             {
                 min_cost = cost_a;
                 cheapest_node = tmp_b;
@@ -76,9 +76,9 @@ void    ft_sort_all(t_stack **stack_a, t_stack **stack_b)
         }
         ft_pa(stack_b, stack_a, 0);
     }
-    while (!ft_checksorted(*stack_a))
+    if (!ft_checksorted(*stack_a))
     {
-        if (cheapest_node->index <= (ft_lst_size(*stack_a) / 2))
+        if (cheapest_node->index >= (ft_lst_size(*stack_a) / 2))
             ft_ra(stack_a, 0);
         else
             ft_rra(stack_a, 0);
